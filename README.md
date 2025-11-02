@@ -6,12 +6,21 @@ Custom authenticator for remembering the user logging in, even if no "Remember m
 Since this package implements internal Keycloak SPIs, there's a chance this extension breaks with a new major version of Keycloak.  
 See compatibility list below to find the version that suits your Keycloak version.
 
+
 | Keycloak Version        | Extension Version                                |
 |-------------------------|--------------------------------------------------|
 | `= 17.0.0`              | Verified, requires modified pom and compilation. |
 | `< 20.0.0`              | :warning: Not verified, use at your own risk.    |
-| `>= 20.*` and `<= 24.*` | :white_check_mark: `1.0.0`                       |
-| `> 24`                  | :warning: Not verified, use at your own risk.    |
+| `>= 20.*` and `<= 26.*` | :white_check_mark: `1.0.0`                       |
+| `> 27`                  | :warning: Not verified, use at your own risk.    |
+
+> [!CAUTION]
+> As of version `26.4.1` it is necessary to [enable `Remember me`](https://www.keycloak.org/docs/26.4.1/server_admin/#enabling-remember-me) in the realm settings. Failure to do so will lead to an event of type `CODE_TO_TOKEN_ERROR` and error message `user_session_not_found`.
+>
+> The log only displays [the following helpful message](https://github.com/keycloak/keycloak/blob/802e43c58ee8989a1beb8e5d905aa73c1ca21e4b/services/src/main/java/org/keycloak/services/managers/AuthenticationManager.java#L189) when the log level is set to `DEBUG`:
+> ```
+> Session 01234567-89ab-cdef-0123-456789abcdef invalid: created with remember me but remember me is disabled for the realm.
+> ```
 
 # Usage
 
